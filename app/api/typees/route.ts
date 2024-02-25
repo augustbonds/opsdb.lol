@@ -1,5 +1,6 @@
 import { getSession } from '@auth0/nextjs-auth0';
 import { PrismaClient, Typee } from '@prisma/client';
+import { NextApiRequest } from 'next';
 
 const prisma = new PrismaClient();
 
@@ -43,8 +44,19 @@ export const POST = async function handle(
 
 export const GET = async function handle(req: Request) {
 
+  const { searchParams } = new URL(req.url);
+  const query = searchParams.get('query');
+
   try {
+    const searchCondition = query ? {
+      name : {
+        contains: query as string,
+        mode: 'insensitive' as const
+      }
+    } : {};
+
     const typees: Typee[] = await prisma.typee.findMany({
+      where: searchCondition,
       include: {
         votes: false,
       },
