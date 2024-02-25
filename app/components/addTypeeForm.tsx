@@ -1,4 +1,3 @@
-// components/AddTypeeForm.tsx
 "use client"
 import { useUser } from "@auth0/nextjs-auth0/client";
 import React, { useState, FormEvent } from "react";
