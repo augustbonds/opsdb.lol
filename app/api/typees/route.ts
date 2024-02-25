@@ -1,5 +1,5 @@
 import { getSession } from '@auth0/nextjs-auth0';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Typee } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -39,4 +39,19 @@ export const POST = async function handle(
     console.error('Error adding Typee:', error);
     return Response.json({ message: 'Something went wrong' }, { status: 500 });
   }
+}
+
+export const GET = async function handle(req: Request) {
+
+  try {
+    const typees: Typee[] = await prisma.typee.findMany({
+      include: {
+        votes: false,
+      },
+    });
+    return Response.json(typees);
+  } catch (error) {
+    return Response.json({ error: "Failed to fetch typees" }, { status: 500 });
+  }
+
 }

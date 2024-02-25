@@ -15,7 +15,7 @@ const AddTypeeForm: React.FC = () => {
     }
 
     try {
-      const response = await fetch("/api/people", {
+      const response = await fetch("/api/typees", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
