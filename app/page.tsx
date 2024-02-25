@@ -7,15 +7,15 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [typees, setTypees] = useState<Typee[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  
-  // Debounced fetch function
-  const fetchTypees = debounce((query: string) => {
-    fetch(`/api/typees?query=${query}`)
-      .then((response) => response.json())
-      .then((data: Typee[]) => setTypees(data));
-  }, 500); // Debounce delay in milliseconds
 
   useEffect(() => {
+    // Debounced fetch function
+    const fetchTypees = debounce((query: string) => {
+      fetch(`/api/typees?query=${query}`)
+        .then((response) => response.json())
+        .then((data: Typee[]) => setTypees(data));
+    }, 500); // Debounce delay in milliseconds
+
     fetchTypees(searchQuery);
   }, [searchQuery]);
 
@@ -38,7 +38,9 @@ export default function Home() {
           <tbody>
             {typees.map((typee) => (
               <tr key={typee.id}>
-                <td><Link href={`/typees/${typee.id}`}>{typee.name}</Link></td>
+                <td>
+                  <Link href={`/typees/${typee.id}`}>{typee.name}</Link>
+                </td>
               </tr>
             ))}
           </tbody>
