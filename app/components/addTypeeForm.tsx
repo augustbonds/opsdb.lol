@@ -3,7 +3,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import React, { useState, FormEvent } from "react";
 
 const AddTypeeForm: React.FC = () => {
-  const { user, error, isLoading } = useUser();
+  const { user } = useUser();
   const [name, setName] = useState<string>("");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
