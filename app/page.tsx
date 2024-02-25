@@ -1,8 +1,8 @@
 "use client";
-import { Typee } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Typee } from "./types/types";
 
 export default function Home() {
   const [typees, setTypees] = useState<Typee[]>([]);
@@ -33,6 +33,7 @@ export default function Home() {
           <thead>
             <tr>
               <th>Name</th>
+              <th>Added By</th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +41,9 @@ export default function Home() {
               <tr key={typee.id}>
                 <td>
                   <Link href={`/typees/${typee.id}`}>{typee.name}</Link>
+                </td>
+                <td>
+                  {typee.createdBy.name}
                 </td>
               </tr>
             ))}

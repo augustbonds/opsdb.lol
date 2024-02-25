@@ -5,5 +5,11 @@ export interface Vote {
 export interface Typee {
     id: string;
     name: string;
-    votes: Vote[];
+    createdBy: TypeeCreator;
+    votes?: Vote[];
+}
+
+export interface TypeeCreator {
+    id: string;
+    name: string;
 }

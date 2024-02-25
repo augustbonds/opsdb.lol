@@ -3,85 +3,88 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Typee {
-    id      String    @default(cuid()) @id
-    name    String
-    votes   Vote[]
+  id        String @id @default(cuid())
+  name      String
+  votes     Vote[]
+  createdBy User   @relation(references: [id], fields: [createdByUserId])
+  createdByUserId    String @map("userId")
 }
 
 model Vote {
-  id        String     @default(cuid()) @id
-  author    User?      @relation(fields: [authorId], references: [id])
-  authorId  String?
-  typee     Typee?     @relation(fields: [typeeId], references: [id])
-  typeeId   String?  
+  id                String            @id @default(cuid())
+  author            User?             @relation(fields: [authorId], references: [id])
+  authorId          String?
+  typee             Typee?            @relation(fields: [typeeId], references: [id])
+  typeeId           String?
   observerOrDecider ObserverOrDecider
-  diOrDe DiOrDe
-  oiOrOe OiOrOe
-  nOrS NOrS
-  fOrT FOrT
-  sleepOrPlay SleepOrPlay
-  consumeOrBlast ConsumeOrBlast
-  infoOrEnergy InfoOrEnergy
-  iOrE IOrE
+  diOrDe            DiOrDe
+  oiOrOe            OiOrOe
+  nOrS              NOrS
+  fOrT              FOrT
+  sleepOrPlay       SleepOrPlay
+  consumeOrBlast    ConsumeOrBlast
+  infoOrEnergy      InfoOrEnergy
+  iOrE              IOrE
 }
 
 model User {
-  id            String       @default(cuid()) @id
-  name          String?
-  email         String?   @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  votes         Vote[]
+  id        String   @id @default(cuid())
+  name      String?
+  email     String?  @unique
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  votes     Vote[]
+  typees    Typee[]
   @@map(name: "users")
 }
 
 enum ObserverOrDecider {
-    Observer
-    Decider 
+  Observer
+  Decider
 }
 
 enum DiOrDe {
-    Di
-    De
+  Di
+  De
 }
 
 enum OiOrOe {
-    Oi
-    Oe
+  Oi
+  Oe
 }
 
 enum NOrS {
-    N
-    S
+  N
+  S
 }
 
 enum FOrT {
-    F
-    T
+  F
+  T
 }
 
 enum SleepOrPlay {
-    Sleep
-    Play
+  Sleep
+  Play
 }
 
 enum ConsumeOrBlast {
-    Consume
-    Blast
+  Consume
+  Blast
 }
 
 enum InfoOrEnergy {
-    Info
-    Energy
+  Info
+  Energy
 }
 
 enum IOrE {
-    I
-    E
+  I
+  E
 }
