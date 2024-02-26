@@ -1,6 +1,6 @@
 // pages/typee/[typeeId]/vote.js or vote.tsx for TypeScript
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const VoteForm = ({ params }: { params: { typeeId: string } }) => {
   const typeeId = params.typeeId;
@@ -15,6 +15,29 @@ const VoteForm = ({ params }: { params: { typeeId: string } }) => {
     infoOrEnergy: "",
     iOrE: "",
   });
+
+  const [computedType, setComputedType] = useState("")
+  const [typeeName, setTypeeName] = useState("");
+
+  useEffect(() => {
+    const newValue = computeNewType(voteData);
+    setComputedType(newValue);
+  }, [JSON.stringify(voteData)])
+
+  useEffect(() => {
+    fetch(`/api/typees/${typeeId}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setTypeeName(data.name);
+    })
+  }, [typeeId])
+
+  // Placeholder function for computation logic
+  function computeNewType(voteData: Object) {
+    // Implement your computation logic here
+    // Example: concatenate all values
+    return Object.values(voteData).filter(Boolean).join(", ");
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,6 +67,9 @@ const VoteForm = ({ params }: { params: { typeeId: string } }) => {
 
   // Form with inputs for each voting criteria
   return (
+    <div>
+      <p>Voting for: {typeeName}</p>
+      <p>Type: {computedType}</p>
     <form onSubmit={handleSubmit}>
       {/* ObserverOrDecider */}
       <div>
@@ -153,6 +179,7 @@ const VoteForm = ({ params }: { params: { typeeId: string } }) => {
 
       <button type="submit">Submit Vote</button>
     </form>
+    </div>
   );
 };
 

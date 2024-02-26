@@ -1,5 +1,6 @@
 "use client"
 import { Typee } from "@/app/types/types";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function TypeePage({ params }: { params: { typeeId: string }}) {
@@ -32,6 +33,7 @@ export default function TypeePage({ params }: { params: { typeeId: string }}) {
           {vote.author?.name || 'Anonymous'}: {JSON.stringify(vote)}
         </p>
       ))}
+      <Link href={`/typees/${typeeId}/vote`}>Vote!</Link>
     </div>
   );
 }
