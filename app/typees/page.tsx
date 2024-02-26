@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import { Typee } from "../types/types";
+import { TypeDirectory as TypeeDirectory } from "../components/TypeDirectory";
 
 const TypeesPage : React.FC = () => {
   const [typees, setTypees] = useState<Typee[]>([]);
@@ -15,28 +16,9 @@ const TypeesPage : React.FC = () => {
     <div>
       <p>Press the button to create a new person to type</p>
       <a href="/typees/new">
-        <button>New</button>
+        <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">New</button>
       </a>
-      <div>
-        <h1>Typees</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Votes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {typees.map((typee) => (
-              <tr key={typee.id}>
-                <td>{typee.id}</td>
-                <td>{typee.name}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <TypeeDirectory></TypeeDirectory>
     </div>
   );
 };

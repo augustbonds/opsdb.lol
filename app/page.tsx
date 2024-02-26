@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Typee } from "./types/types";
+import { TypeDirectory } from "./components/TypeDirectory";
 
 export default function Home() {
   const [typees, setTypees] = useState<Typee[]>([]);
@@ -20,35 +21,7 @@ export default function Home() {
 
   return (
     <main>
-      <div>
-        <h1>Typee Directory</h1>
-        <input
-          type="text"
-          placeholder="Search by name..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Added By</th>
-            </tr>
-          </thead>
-          <tbody>
-            {typees.map((typee) => (
-              <tr key={typee.id}>
-                <td>
-                  <Link href={`/typees/${typee.id}`}>{typee.name}</Link>
-                </td>
-                <td>
-                  {typee.createdBy.name}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <TypeDirectory></TypeDirectory>
     </main>
   );
 }

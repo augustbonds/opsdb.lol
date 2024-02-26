@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import React, { useState, FormEvent } from "react";
 
@@ -36,15 +36,37 @@ const AddTypeeForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Typee Name:</label>
-      <input
-        type="text"
-        id="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <button type="submit">Add Typee</button>
+      <div className="md:flex md:items-center mb-6">
+        <div className="md:w-1/3">
+          <label
+            htmlFor="name"
+            className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+          >
+            Typee Name
+          </label>
+        </div>
+        <div className="md:w-1/3">
+          <input
+            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            id="name"
+            type="text"
+            placeholder="Who do you want to add?"
+            onChange={(e) => setName(e.target.value)}
+            required
+          ></input>
+        </div>
+      </div>
+      <div className="md:flex md:items-center">
+        <div className="md:w-1/3"></div>
+        <div className="md:w-2/3">
+          <button
+            className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Add Typee
+          </button>
+        </div>
+      </div>
     </form>
   );
 };
