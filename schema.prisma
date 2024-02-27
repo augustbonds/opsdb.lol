@@ -88,3 +88,13 @@ enum IOrE {
   I
   E
 }
+
+enum FOrMS {
+  F
+  M
+}
+
+enum FOrMDe {
+  F
+  M
+}
