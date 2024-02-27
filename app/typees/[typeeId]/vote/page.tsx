@@ -126,7 +126,6 @@ const VoteForm = ({ params }: { params: { typeeId: string } }) => {
       );
     }
     if (voteData.oiOrOe == "Oi") {
-      console.log(filteredTypes);
       filteredTypes = filteredTypes.filter(
         (item) =>
           item.substring(0, 5).includes("Si") ||
@@ -161,7 +160,7 @@ const VoteForm = ({ params }: { params: { typeeId: string } }) => {
         return indexOfS < indexOfP;
       });
     }
-    if (voteData.sleepOrPlay == "Sleep") {
+    if (voteData.sleepOrPlay == "Play") {
       filteredTypes = filteredTypes.filter((item) => {
         const indexOfS = item.indexOf("S");
         const indexOfP = item.indexOf("P");
@@ -217,9 +216,9 @@ const VoteForm = ({ params }: { params: { typeeId: string } }) => {
       );
     }
 
-    console.log(`Only ${filteredTypes.length}/${opTypes.length} left!`);
+    console.debug(`Only ${filteredTypes.length}/${opTypes.length} left!`);
     if (filteredTypes.length < 3){
-      filteredTypes.forEach((type) => console.log(type));
+      filteredTypes.forEach((type) => console.debug(type));
     }
     return filteredTypes;
   }
