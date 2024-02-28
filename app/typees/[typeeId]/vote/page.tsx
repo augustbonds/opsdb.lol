@@ -105,21 +105,12 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setVoteData({
-      ...voteData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  
-
   // Form with inputs for each voting criteria
   return (
     <div>
       <p>Voting for: {typeeName}</p>
       <p>Type: {computedType}</p>
-      <VoteForm handleSubmit={handleSubmit} handleChange={handleChange} voteData={voteData} setVoteData={setVoteData}></VoteForm>
+      <VoteForm handleSubmit={handleSubmit} voteData={voteData} setVoteData={setVoteData}></VoteForm>
     </div>
   );
 };
