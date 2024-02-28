@@ -1,143 +1,297 @@
-import React, {ReactNode} from 'react';
-import { VoteData } from './typeCalculator';
+import React, { ReactNode } from "react";
+import { VoteData } from "./typeCalculator";
 
 interface VoteFormProps {
-    handleSubmit: React.FormEventHandler;
-    handleChange: React.ChangeEventHandler;
-    voteData: VoteData
+  handleSubmit: React.FormEventHandler;
+  voteData: VoteData;
+  setVoteData: React.Dispatch<React.SetStateAction<VoteData>>;
 }
 
-const VoteForm: React.FC<VoteFormProps> = ({handleSubmit, handleChange, voteData}) => {
-    return (
+interface BinaryChoiceButtonProps {
+  name: keyof VoteData;
+  value: string;
+  currentValue: string;
+  title: string;
+  onBinaryChoiceClick: (name: keyof VoteData, value: string) => void;
+}
+
+const BinaryChoiceButton: React.FC<BinaryChoiceButtonProps> = ({
+  name,
+  value,
+  currentValue,
+  title,
+  onBinaryChoiceClick,
+}) => {
+  const handleClick = () => {
+    onBinaryChoiceClick(name, value);
+  };
+
+  // Determine if the button should appear active
+  const isActive = currentValue === value;
+
+  return (
+    <button
+      type="button"
+      className={`${
+        isActive ? "bg-blue-500" : "bg-gray-400"
+      } text-white font-semibold py-2 px-4 rounded-full mr-2`}
+      onClick={handleClick}
+    >
+      {title}
+    </button>
+  );
+};
+
+const VoteForm: React.FC<VoteFormProps> = ({
+  handleSubmit,
+  voteData,
+  setVoteData,
+}) => {
+  const handleBinaryChoiceButtonClick = (
+    name: keyof VoteData,
+    value: string
+  ) => {
+    setVoteData((prevState) => ({
+      ...prevState,
+      [name]: prevState[name] === value ? "" : value, // Toggle the value
+    }));
+  };
+
+  return (
     <form onSubmit={handleSubmit}>
-        {/* ObserverOrDecider */}
+      {/* ObserverOrDecider */}
+      <div>
+        <label>Observer or Decider:</label>
         <div>
-          <label htmlFor="observerOrDecider">Observer or Decider:</label>
-          <select
+          <BinaryChoiceButton
             name="observerOrDecider"
-            onChange={handleChange}
-            value={voteData.observerOrDecider}
-          >
-            <option value="">Select...</option>
-            <option value="Observer">Observer</option>
-            <option value="Decider">Decider</option>
-          </select>
+            value="Observer"
+            currentValue={voteData.observerOrDecider}
+            title="O"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="observerOrDecider"
+            value="Decider"
+            currentValue={voteData.observerOrDecider}
+            title="D"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* DiOrDe */}
+      {/* DiOrDe */}
+      <div>
+        <label>Di or De:</label>
         <div>
-          <label htmlFor="diOrDe">Di or De:</label>
-          <select name="diOrDe" onChange={handleChange} value={voteData.diOrDe}>
-            <option value="">Select...</option>
-            <option value="Di">Di</option>
-            <option value="De">De</option>
-          </select>
+          <BinaryChoiceButton
+            name="diOrDe"
+            value="Di"
+            currentValue={voteData.diOrDe}
+            title="Di"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="diOrDe"
+            value="De"
+            currentValue={voteData.diOrDe}
+            title="De"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* OiOrOe */}
+      {/* OiOrOe */}
+      <div>
+        <label>Oi or Oe:</label>
         <div>
-          <label htmlFor="oiOrOe">Oi or Oe:</label>
-          <select name="oiOrOe" onChange={handleChange} value={voteData.oiOrOe}>
-            <option value="">Select...</option>
-            <option value="Oi">Oi</option>
-            <option value="Oe">Oe</option>
-          </select>
+          <BinaryChoiceButton
+            name="oiOrOe"
+            value="Oi"
+            currentValue={voteData.oiOrOe}
+            title="Oi"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="oiOrOe"
+            value="Oe"
+            currentValue={voteData.oiOrOe}
+            title="Oe"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* NOrS */}
+      {/* NOrS */}
+      <div>
+        <label>N or S:</label>
         <div>
-          <label htmlFor="nOrS">N or S:</label>
-          <select name="nOrS" onChange={handleChange} value={voteData.nOrS}>
-            <option value="">Select...</option>
-            <option value="N">N</option>
-            <option value="S">S</option>
-          </select>
+          <BinaryChoiceButton
+            name="nOrS"
+            value="N"
+            currentValue={voteData.nOrS}
+            title="N"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="nOrS"
+            value="S"
+            currentValue={voteData.nOrS}
+            title="S"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* FOrT */}
+      {/* FOrT */}
+      <div>
+        <label>F or T:</label>
         <div>
-          <label htmlFor="fOrT">F or T:</label>
-          <select name="fOrT" onChange={handleChange} value={voteData.fOrT}>
-            <option value="">Select...</option>
-            <option value="F">F</option>
-            <option value="T">T</option>
-          </select>
+          <BinaryChoiceButton
+            name="fOrT"
+            value="F"
+            currentValue={voteData.fOrT}
+            title="F"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="fOrT"
+            value="T"
+            currentValue={voteData.fOrT}
+            title="T"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* SleepOrPlay */}
+      {/* SleepOrPlay */}
+      <div>
+        <label>Sleep or Play:</label>
         <div>
-          <label htmlFor="sleepOrPlay">Sleep or Play:</label>
-          <select
+          <BinaryChoiceButton
             name="sleepOrPlay"
-            onChange={handleChange}
-            value={voteData.sleepOrPlay}
-          >
-            <option value="">Select...</option>
-            <option value="Sleep">Sleep</option>
-            <option value="Play">Play</option>
-          </select>
+            value="Sleep"
+            currentValue={voteData.sleepOrPlay}
+            title="Sleep"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="sleepOrPlay"
+            value="Play"
+            currentValue={voteData.sleepOrPlay}
+            title="Play"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* ConsumeOrBlast */}
+      {/* ConsumeOrBlast */}
+      <div>
+        <label>Consume or Blast:</label>
         <div>
-          <label htmlFor="consumeOrBlast">Consume or Blast:</label>
-          <select
+          <BinaryChoiceButton
             name="consumeOrBlast"
-            onChange={handleChange}
-            value={voteData.consumeOrBlast}
-          >
-            <option value="">Select...</option>
-            <option value="Consume">Consume</option>
-            <option value="Blast">Blast</option>
-          </select>
+            value="Consume"
+            currentValue={voteData.consumeOrBlast}
+            title="Consume"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="consumeOrBlast"
+            value="Blast"
+            currentValue={voteData.consumeOrBlast}
+            title="Blast"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* InfoOrEnergy */}
+      {/* InfoOrEnergy */}
+      <div>
+        <label>Info or Energy:</label>
         <div>
-          <label htmlFor="infoOrEnergy">Info or Energy:</label>
-          <select
+          <BinaryChoiceButton
             name="infoOrEnergy"
-            onChange={handleChange}
-            value={voteData.infoOrEnergy}
-          >
-            <option value="">Select...</option>
-            <option value="Info">Info</option>
-            <option value="Energy">Energy</option>
-          </select>
+            value="Info"
+            currentValue={voteData.infoOrEnergy}
+            title="Info"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="infoOrEnergy"
+            value="Energy"
+            currentValue={voteData.infoOrEnergy}
+            title="Energy"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* IOrE */}
+      {/* IOrE */}
+      <div>
+        <label>Introvert or Extrovert:</label>
         <div>
-          <label htmlFor="iOrE">I or E:</label>
-          <select name="iOrE" onChange={handleChange} value={voteData.iOrE}>
-            <option value="">Select...</option>
-            <option value="I">I</option>
-            <option value="E">E</option>
-          </select>
+          <BinaryChoiceButton
+            name="iOrE"
+            value="I"
+            currentValue={voteData.iOrE}
+            title="Introvert"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="iOrE"
+            value="E"
+            currentValue={voteData.iOrE}
+            title="Extrovert"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* FOrMS */}
+      {/* FOrMS */}
+      <div>
+        <label>F or M Sensory</label>
         <div>
-          <label htmlFor="fOrMS">F or M Sensory:</label>
-          <select name="fOrMS" onChange={handleChange} value={voteData.fOrMS}>
-            <option value="">Select...</option>
-            <option value="F">F</option>
-            <option value="M">M</option>
-          </select>
+          <BinaryChoiceButton
+            name="fOrMS"
+            value="F"
+            currentValue={voteData.fOrMS}
+            title="F"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="fOrMS"
+            value="M"
+            currentValue={voteData.fOrMS}
+            title="M"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
+      </div>
 
-        {/* FOrMDe */}
+      {/* FOrMDe */}
+      <div>
+        <label>F or M Extroverted Decier</label>
         <div>
-          <label htmlFor="fOrMDe">F or M De:</label>
-          <select name="fOrMDe" onChange={handleChange} value={voteData.fOrMDe}>
-            <option value="">Select...</option>
-            <option value="F">F</option>
-            <option value="M">M</option>
-          </select>
+          <BinaryChoiceButton
+            name="fOrMDe"
+            value="F"
+            currentValue={voteData.fOrMDe}
+            title="F"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
+          <BinaryChoiceButton
+            name="fOrMDe"
+            value="M"
+            currentValue={voteData.fOrMDe}
+            title="M"
+            onBinaryChoiceClick={handleBinaryChoiceButtonClick}
+          />
         </div>
-
-        <button type="submit">Submit Vote</button>
-      </form>);
-}
+      </div>
+      <button type="submit">Submit Vote</button>
+    </form>
+  );
+};
 
 export default VoteForm;

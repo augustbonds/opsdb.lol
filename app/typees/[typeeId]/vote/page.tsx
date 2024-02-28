@@ -112,12 +112,14 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
     });
   };
 
+  
+
   // Form with inputs for each voting criteria
   return (
     <div>
       <p>Voting for: {typeeName}</p>
       <p>Type: {computedType}</p>
-      <VoteForm handleSubmit={handleSubmit} handleChange={handleChange} voteData={voteData}></VoteForm>
+      <VoteForm handleSubmit={handleSubmit} handleChange={handleChange} voteData={voteData} setVoteData={setVoteData}></VoteForm>
     </div>
   );
 };
