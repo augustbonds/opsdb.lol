@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { VoteData, getDeModality, getSensoryModality, possibleTypes } from "./typeCalculator";
 import VoteForm from "./voteForm";
+import Link from "next/link";
 
 const VotePage = ({ params }: { params: { typeeId: string } }) => {
   const typeeId = params.typeeId;
@@ -93,7 +94,7 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...voteData, typeeId }),
+      body: JSON.stringify({ ...voteData }),
     });
 
     if (response.ok) {
@@ -108,7 +109,7 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
   // Form with inputs for each voting criteria
   return (
     <div>
-      <p>Voting for: {typeeName}</p>
+      <p>Voting for: <Link href={`/typees/${typeeId}`}>{typeeName}</Link></p>
       <p>Type: {computedType}</p>
       <VoteForm handleSubmit={handleSubmit} voteData={voteData} setVoteData={setVoteData}></VoteForm>
     </div>
