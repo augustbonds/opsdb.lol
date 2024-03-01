@@ -10,7 +10,11 @@ export const GET = async function handle(req: Request,
             where: { id: typeeId },
             include: {
                 createdBy: true,
-                votes: true,
+                votes: {
+                    include: {
+                        author: true
+                    }
+                }
             }
         });
 

@@ -1,13 +1,13 @@
 // pages/typee/[typeeId]/vote.js or vote.tsx for TypeScript
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
-import { VoteData, getDeModality, getSensoryModality, possibleTypes } from "./typeCalculator";
+import { Vote, computeTypeString } from "./typeCalculator";
 import VoteForm from "./voteForm";
 import Link from "next/link";
 
 const VotePage = ({ params }: { params: { typeeId: string } }) => {
   const typeeId = params.typeeId;
-  const [voteData, setVoteData] = useState<VoteData>({
+  const [vote, setVoteData] = useState<Vote>({
     observerOrDecider: "",
     diOrDe: "",
     oiOrOe: "",
@@ -24,25 +24,12 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
   const [computedType, setComputedType] = useState("");
   const [typeeName, setTypeeName] = useState("");
 
-  // Placeholder function for computation logic
-  const computeNewType = useCallback((voteData: VoteData): string => {
-    // Implement your computation logic here
-    // Example: concatenate all values
-    const types = possibleTypes(voteData);
-    const type = produceConsensusString(types);
-    // const mbtiType = getMbtiType(voteData);
-    const sensoryModality = getSensoryModality(voteData);
-    const deModality = getDeModality(voteData);
-    if (type === "Impossible type") {
-      return type;
-    }
-    return `${sensoryModality}${deModality} ${type}`;
-  }, []);
+  const computeNewType = useCallback(computeTypeString, []);
 
   useEffect(() => {
-    const newValue = computeNewType(voteData);
+    const newValue = computeNewType(vote);
     setComputedType(newValue);
-  }, [voteData, computeNewType]);
+  }, [vote, computeNewType]);
 
   useEffect(() => {
     fetch(`/api/typees/${typeeId}`)
@@ -52,41 +39,6 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
       });
   }, [typeeId]);
 
-  const produceConsensusString = (arr: string[]): string => {
-    if (arr.length === 0) return "Impossible type";
-
-    let resultChars = arr[0].split("");
-
-    for (let i = 0; i < arr[0].length; i++) {
-      // Assume the character is consistent, until proven otherwise.
-      let isConsistent = true;
-      let isUpperCase = false;
-
-      if (resultChars[i].match(/[A-Za-z]/)) {
-        // Check if it's a letter
-        for (let j = 1; j < arr.length; j++) {
-          // Check if any character is uppercase in any of the strings
-          if (arr[j][i] !== arr[j][i].toLowerCase()) {
-            isUpperCase = true;
-          }
-          // If any character differs from the first string
-          if (arr[j][i] !== resultChars[i]) {
-            isConsistent = false;
-            break;
-          }
-        }
-
-        // Replace with 'X' or 'x' based on case
-        if (!isConsistent) {
-          resultChars[i] = isUpperCase ? "X" : "x";
-        }
-      }
-      // Non-letter characters are kept as is.
-    }
-
-    return resultChars.join("");
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const response = await fetch(`/api/typees/${typeeId}/vote`, {
@@ -94,7 +46,7 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...voteData }),
+      body: JSON.stringify({ ...vote }),
     });
 
     if (response.ok) {
@@ -109,9 +61,15 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
   // Form with inputs for each voting criteria
   return (
     <div>
-      <p>Voting for: <Link href={`/typees/${typeeId}`}>{typeeName}</Link></p>
+      <p>
+        Voting for: <Link href={`/typees/${typeeId}`}>{typeeName}</Link>
+      </p>
       <p>Type: {computedType}</p>
-      <VoteForm handleSubmit={handleSubmit} voteData={voteData} setVoteData={setVoteData}></VoteForm>
+      <VoteForm
+        handleSubmit={handleSubmit}
+        vote={vote}
+        setVoteData={setVoteData}
+      ></VoteForm>
     </div>
   );
 };

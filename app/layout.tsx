@@ -22,7 +22,9 @@ export default function RootLayout({
         <body>
           <Header></Header>
           <div className="flex justify-center">
-            <div className="w-[700px] mx-auto bg-gray-100 p-4">{children}</div>
+            <div className="w-[700px] mx-auto bg-gray-100 p-4">
+              {children}
+            </div>
           </div>
         </body>
       </UserProvider>

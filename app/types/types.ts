@@ -1,4 +1,4 @@
-export interface Vote {
+export interface StoredVote {
     id: string;
     author: TypeeCreator;
     typeeId: String;
@@ -11,13 +11,15 @@ export interface Vote {
     consumeOrBlast: string
     infoOrEnergy: string
     iOrE: string
+    fOrMS: string
+    fOrMDe: string
 }
 
 export interface Typee {
     id: string;
     name: string;
     createdBy: TypeeCreator;
-    votes?: Vote[];
+    votes?: StoredVote[];
 }
 
 export interface TypeeCreator {

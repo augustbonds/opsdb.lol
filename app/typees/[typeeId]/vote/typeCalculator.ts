@@ -1,6 +1,6 @@
 import opTypes from "./op_types.json";
 
-export interface VoteData {
+export interface Vote {
     observerOrDecider: string;
     diOrDe: string;
     oiOrOe: string;
@@ -14,7 +14,56 @@ export interface VoteData {
     fOrMDe: string;
 }
 
-export function possibleTypes(voteData: VoteData) {
+const produceConsensusString = (arr: string[]): string => {
+    if (arr.length === 0) return "Impossible type";
+
+    let resultChars = arr[0].split("");
+
+    for (let i = 0; i < arr[0].length; i++) {
+      // Assume the character is consistent, until proven otherwise.
+      let isConsistent = true;
+      let isUpperCase = false;
+
+      if (resultChars[i].match(/[A-Za-z]/)) {
+        // Check if it's a letter
+        for (let j = 1; j < arr.length; j++) {
+          // Check if any character is uppercase in any of the strings
+          if (arr[j][i] !== arr[j][i].toLowerCase()) {
+            isUpperCase = true;
+          }
+          // If any character differs from the first string
+          if (arr[j][i] !== resultChars[i]) {
+            isConsistent = false;
+            break;
+          }
+        }
+
+        // Replace with 'X' or 'x' based on case
+        if (!isConsistent) {
+          resultChars[i] = isUpperCase ? "X" : "x";
+        }
+      }
+      // Non-letter characters are kept as is.
+    }
+
+    return resultChars.join("");
+  };
+
+export const computeTypeString = (voteData: Vote) => {
+    // Implement your computation logic here
+    // Example: concatenate all values
+    const types = possibleTypes(voteData);
+    const type = produceConsensusString(types);
+    // const mbtiType = getMbtiType(voteData);
+    const sensoryModality = getSensoryModality(voteData);
+    const deModality = getDeModality(voteData);
+    if (type === "Impossible type") {
+      return type;
+    }
+    return `${sensoryModality}${deModality} ${type}`;
+};
+
+export function possibleTypes(voteData: Vote) {
     var filteredTypes = [...opTypes];
     if (voteData.observerOrDecider == "Observer") {
         filteredTypes = filteredTypes.filter(
@@ -138,7 +187,7 @@ export function possibleTypes(voteData: VoteData) {
     return filteredTypes;
 }
 
-export function getSensoryModality(voteData: VoteData): string {
+export function getSensoryModality(voteData: Vote): string {
     if (voteData.fOrMS == "F") {
         return "F";
     }
@@ -148,7 +197,7 @@ export function getSensoryModality(voteData: VoteData): string {
     return "X";
 }
 
-export function getDeModality(voteData: VoteData): string {
+export function getDeModality(voteData: Vote): string {
     if (voteData.fOrMDe == "F") {
         return "F";
     }

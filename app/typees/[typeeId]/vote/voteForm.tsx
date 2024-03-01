@@ -1,29 +1,29 @@
 import React, { ReactNode } from "react";
-import { VoteData } from "./typeCalculator";
+import { Vote } from "./typeCalculator";
 
 interface VoteFormProps {
   handleSubmit: React.FormEventHandler;
-  voteData: VoteData;
-  setVoteData: React.Dispatch<React.SetStateAction<VoteData>>;
+  vote: Vote;
+  setVoteData: React.Dispatch<React.SetStateAction<Vote>>;
 }
 
 interface BinaryChoiceButtonProps {
-  name: keyof VoteData;
+  name: keyof Vote;
   value: string;
   currentValue: string;
   title: string;
-  onBinaryChoiceClick: (name: keyof VoteData, value: string) => void;
+  onBinaryChoiceClick: (name: keyof Vote, value: string) => void;
 }
 
 interface BinaryChoiceSectionProps {
   label: string;
-  name: keyof VoteData;
+  name: keyof Vote;
   leftButtonValue: string;
   leftButtonTitle: string;
   rightButtonValue: string;
   rightButtonTitle: string;
   currentValue: string;
-  onBinaryChoiceClick: (name: keyof VoteData, value: string) => void;
+  onBinaryChoiceClick: (name: keyof Vote, value: string) => void;
 }
 
 const BinaryChoiceSection: React.FC<BinaryChoiceSectionProps> = ({
@@ -90,11 +90,11 @@ const BinaryChoiceButton: React.FC<BinaryChoiceButtonProps> = ({
 
 const VoteForm: React.FC<VoteFormProps> = ({
   handleSubmit,
-  voteData,
+  vote,
   setVoteData,
 }) => {
   const handleBinaryChoiceButtonClick = (
-    name: keyof VoteData,
+    name: keyof Vote,
     value: string
   ) => {
     setVoteData((prevState) => ({
@@ -113,7 +113,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="O"
         rightButtonValue="Decider"
         rightButtonTitle="D"
-        currentValue={voteData.observerOrDecider}
+        currentValue={vote.observerOrDecider}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* DiOrDe */}
@@ -124,7 +124,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="Di"
         rightButtonValue="De"
         rightButtonTitle="De"
-        currentValue={voteData.diOrDe}
+        currentValue={vote.diOrDe}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* OiOrOe */}
@@ -135,7 +135,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="Oi"
         rightButtonValue="Oe"
         rightButtonTitle="Oe"
-        currentValue={voteData.oiOrOe}
+        currentValue={vote.oiOrOe}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* NOrS */}
@@ -146,7 +146,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="N"
         rightButtonValue="S"
         rightButtonTitle="S"
-        currentValue={voteData.nOrS}
+        currentValue={vote.nOrS}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* FOrT */}
@@ -157,7 +157,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="F"
         rightButtonValue="T"
         rightButtonTitle="T"
-        currentValue={voteData.fOrT}
+        currentValue={vote.fOrT}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* SleepOrPlay */}
@@ -168,7 +168,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="Sleep"
         rightButtonValue="Play"
         rightButtonTitle="Play"
-        currentValue={voteData.sleepOrPlay}
+        currentValue={vote.sleepOrPlay}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* ConsumeOrBlast */}
@@ -179,7 +179,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="Consume"
         rightButtonValue="Blast"
         rightButtonTitle="Blast"
-        currentValue={voteData.consumeOrBlast}
+        currentValue={vote.consumeOrBlast}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* InfoOrEnergy */}
@@ -190,7 +190,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="Info"
         rightButtonValue="Energy"
         rightButtonTitle="Energy"
-        currentValue={voteData.infoOrEnergy}
+        currentValue={vote.infoOrEnergy}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* IOrE */}
@@ -201,7 +201,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="Introvert"
         rightButtonValue="E"
         rightButtonTitle="Extrovert"
-        currentValue={voteData.iOrE}
+        currentValue={vote.iOrE}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* FOrMS */}
@@ -212,7 +212,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="F"
         rightButtonValue="M"
         rightButtonTitle="M"
-        currentValue={voteData.fOrMS}
+        currentValue={vote.fOrMS}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       {/* FOrMDe */}
@@ -223,7 +223,7 @@ const VoteForm: React.FC<VoteFormProps> = ({
         leftButtonTitle="F"
         rightButtonValue="M"
         rightButtonTitle="M"
-        currentValue={voteData.fOrMDe}
+        currentValue={vote.fOrMDe}
         onBinaryChoiceClick={handleBinaryChoiceButtonClick}
       />
       <button type="submit">Submit Vote</button>
