@@ -2,7 +2,7 @@
 import { StoredVote, Typee } from "@/app/types/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Vote, possibleTypes } from "./vote/typeCalculator";
+import { Vote, computeTypeString } from "./vote/typeCalculator";
 
 export default function TypeePage({ params }: { params: { typeeId: string } }) {
   const typeeId = params.typeeId;
@@ -148,20 +148,18 @@ const VoteBars: React.FC<VoteBarsProps> = ({ votes }) => {
 };
 
 interface VoteListProps {
-  votes : StoredVote[]
+  votes: StoredVote[];
 }
 
-const VoteList: React.FC<VoteListProps> = ({votes}) => {
-
-
-  return (<div>
-    <h1>What other people think</h1>
-    <ul>
-      {votes.map((vote) => (
-        <li key={vote.id}>
-            {possibleTypes(vote)[0]}
-        </li>
-      ))}
-    </ul>
-  </div>)
-}
+const VoteList: React.FC<VoteListProps> = ({ votes }) => {
+  return (
+    <div>
+      <h1>What other people think</h1>
+      <ul>
+        {votes.map((vote) => (
+          <li key={vote.id}>{computeTypeString(vote)}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
