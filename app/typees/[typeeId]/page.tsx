@@ -54,14 +54,18 @@ const VoteBar: React.FC<VoteBarProps> = ({
 }) => {
   return (
     <div className="flex flex-col items-center">
-      <span>{labelTop}</span>
+      <span className="text-purple-500 font-semibold">{labelTop}</span>
       <div className="w-10 bg-gray-300 h-32 relative">
         <div
-          className="bg-blue-500 absolute bottom-0"
-          style={{ width: "100%", height: `${percentage * 100}%` }}
+          className="bg-purple-500 absolute"
+          style={{ width: "100%", height: `${(1 - percentage) * 100}%`, top: 0 }}
+        ></div>
+        <div
+          className="bg-blue-500 absolute"
+          style={{ width: "100%", height: `${percentage * 100}%`, bottom: 0 }}
         ></div>
       </div>
-      <span>{labelBottom}</span>
+      <span className="text-blue-500 font-semibold">{labelBottom}</span>
     </div>
   );
 };
