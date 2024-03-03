@@ -161,7 +161,7 @@ const VoteList: React.FC<VoteListProps> = ({ votes }) => {
       <h1>What other people think</h1>
       <ul>
         {votes.map((vote) => (
-          <li key={vote.id}>{computeTypeString(vote)} voted by: {vote.author.username}</li>
+          <li key={vote.id}>{computeTypeString(vote)? computeTypeString(vote) : "Impossible Type"} voted by: {vote.author.username}</li>
         ))}
       </ul>
     </div>

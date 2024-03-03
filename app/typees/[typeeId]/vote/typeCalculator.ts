@@ -14,8 +14,8 @@ export interface Vote {
     fOrMDe: string;
 }
 
-const produceConsensusString = (arr: string[]): string => {
-    if (arr.length === 0) return "Impossible type";
+const produceConsensusString = (arr: string[]): string | null => {
+    if (arr.length === 0) return null;
 
     let resultChars = arr[0].split("");
 
@@ -57,8 +57,8 @@ export const computeTypeString = (voteData: Vote) => {
     // const mbtiType = getMbtiType(voteData);
     const sensoryModality = getSensoryModality(voteData);
     const deModality = getDeModality(voteData);
-    if (type === "Impossible type") {
-        return type;
+    if (!type) {
+        return null;
     }
     return `${sensoryModality}${deModality} ${type}`;
 };

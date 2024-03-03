@@ -61,11 +61,12 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
     );
   }
 
-
-  
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!computeTypeString(vote)){
+      alert("Cannot submit impossible type");
+      return;
+    }
     const response = await fetch(`/api/typees/${typeeId}/vote`, {
       method: "POST",
       headers: {
@@ -91,7 +92,7 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
       <p>
         Voting for: <Link href={`/typees/${typeeId}`}>{typeeName}</Link>
       </p>
-      <p>Type: {computedType}</p>
+      <p>Type: {computedType? computedType : "Impossible Type"}</p>
       <VoteForm
         handleSubmit={handleSubmit}
         vote={vote}
