@@ -1,5 +1,29 @@
+// Diana
 ☐ search people by name, author, book name, movie name, series name
 ☐ search external database for characters?
 ☐ display which piece of art the character comes from in the dropdown "Harry Potter" (Harry Potter)
 ☐ search when creating new, to find similar spellings
+//END Diana
+
+// Petra
 ☐ fill in your guess/verified type for yourself, and recommend typed characters/people based on that.
+//END Petra
+
+
+//Al
+☐ voting bars should have two colors (and percentages). each label same color as the color in the voting bar
+// END Al
+
+// Tenebrous
+☐ Social Type
+☐ Modality doesn't show when typed
+//END Tenebrous
+
+
+☐ Redirect to votee page after voting/Error if not logged in
+☐ auth-protect the voting page!! login/register
+
+☐ profile page, change username!!
+
+☐ character description page. I should be able to add metadata to it
+☐ character create should have form with details
