@@ -1,3 +1,5 @@
+import { Vote } from "../typees/[typeeId]/vote/typeCalculator";
+
 export interface StoredVote {
     id: string;
     author: TypeeCreator;
@@ -19,6 +21,7 @@ export interface Typee {
     id: string;
     name: string;
     createdBy: TypeeCreator;
+    communityVote: string;
     votes?: StoredVote[];
 }
 
