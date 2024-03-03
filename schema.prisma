@@ -33,6 +33,8 @@ model Vote {
   iOrE              IOrE?
   fOrMS             FOrMS?
   fOrMDe            FOrMDe?
+
+  @@unique([authorId, typeeId])
 }
 
 model User {
