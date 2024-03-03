@@ -20,10 +20,15 @@
 //END Tenebrous
 
 
-☐ Redirect to votee page after voting/Error if not logged in
 ✔ auth-protect the voting page!! login/register @done(24-03-03 12:33)
 
+//Security/users
 ☐ profile page, change username!!
+☐ hide user details in vote list/character page (in api response)!!!!
 
 ☐ character description page. I should be able to add metadata to it
 ☐ character create should have form with details
+
+✔ Redirect to votee page after voting @done(24-03-03 12:51)
+☐ only allow one vote per person per character.
+    ☐ show failure alert if person has already voted.

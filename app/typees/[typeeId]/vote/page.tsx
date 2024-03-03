@@ -5,6 +5,7 @@ import { Vote, computeTypeString } from "./typeCalculator";
 import VoteForm from "./voteForm";
 import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { redirect, useRouter } from "next/navigation";
 
 const VotePage = ({ params }: { params: { typeeId: string } }) => {
   const typeeId = params.typeeId;
@@ -30,6 +31,8 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
     const newValue = computeNewType(vote);
     setComputedType(newValue);
   }, [vote, computeNewType]);
+
+  const router = useRouter();
 
   useEffect(() => {
     fetch(`/api/typees/${typeeId}`)
@@ -74,8 +77,10 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
     if (response.ok) {
       console.log("Vote submitted successfully!");
       // Redirect or show a success message
+      router.push(`/typees/${typeeId}`);
     } else {
       console.error("There was an error submitting the vote.");
+      alert("There was an error submitting your vote");
       // Handle errors or show an error message
     }
   };
