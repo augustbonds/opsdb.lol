@@ -5,7 +5,7 @@ import { Vote, computeTypeString } from "./typeCalculator";
 import VoteForm from "./voteForm";
 import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const VotePage = ({ params }: { params: { typeeId: string } }) => {
   const typeeId = params.typeeId;
@@ -23,7 +23,7 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
     fOrMDe: "",
   });
 
-  const [computedType, setComputedType] = useState("");
+  const [computedType, setComputedType] = useState<string | null>("");
   const [typeeName, setTypeeName] = useState("");
 
   const computeNewType = useCallback(computeTypeString, []);
