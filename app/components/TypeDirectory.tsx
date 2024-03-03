@@ -43,7 +43,7 @@ export const TypeDirectory = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Added By</th>
+            {/* <th>Added By</th> */}
           </tr>
         </thead>
         <tbody>
@@ -52,9 +52,9 @@ export const TypeDirectory = () => {
               <td>
                 <Link href={`/typees/${typee.id}`}>{typee.name}</Link>
               </td>
-              <td>
+              {/* <td>
                 {typee.createdBy.name}
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
