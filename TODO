@@ -16,12 +16,12 @@
 
 // Tenebrous
 ☐ Social Type
-☐ Modality doesn't show when typed
+✔ Modality doesn't show when typed @done(24-03-03 12:05)
 //END Tenebrous
 
 
 ☐ Redirect to votee page after voting/Error if not logged in
-☐ auth-protect the voting page!! login/register
+✔ auth-protect the voting page!! login/register @done(24-03-03 12:33)
 
 ☐ profile page, change username!!
 
