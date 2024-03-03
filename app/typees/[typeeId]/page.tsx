@@ -29,7 +29,7 @@ export default function TypeePage({ params }: { params: { typeeId: string } }) {
   return (
     <div className="">
       <h1>{typee.name}</h1>
-      <p>Created by: {typee?.createdBy.name}</p>
+      {/* <p>Created by: {typee?.createdBy.name}</p> */}
       <VoteBars votes={votes} />
       <Link href={`/typees/${typeeId}/vote`}>
         <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
