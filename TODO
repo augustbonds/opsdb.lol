@@ -11,7 +11,7 @@
 
 
 //Al
-☐ voting bars should have two colors (and percentages). each label same color as the color in the voting bar
+✔ voting bars should have two colors (and percentages). each label same color as the color in the voting bar @done(24-03-03 16:14)
 // END Al
 
 // Tenebrous
@@ -32,3 +32,5 @@
 ✔ Redirect to votee page after voting @done(24-03-03 12:51)
 ✔ only allow one vote per person per character. @done(24-03-03 15:36)
     ☐ show failure alert if person has already voted.
+
+☐ character page should show what is the most likely type
