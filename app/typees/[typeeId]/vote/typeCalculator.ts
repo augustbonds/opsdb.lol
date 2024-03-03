@@ -20,34 +20,34 @@ const produceConsensusString = (arr: string[]): string => {
     let resultChars = arr[0].split("");
 
     for (let i = 0; i < arr[0].length; i++) {
-      // Assume the character is consistent, until proven otherwise.
-      let isConsistent = true;
-      let isUpperCase = false;
+        // Assume the character is consistent, until proven otherwise.
+        let isConsistent = true;
+        let isUpperCase = false;
 
-      if (resultChars[i].match(/[A-Za-z]/)) {
-        // Check if it's a letter
-        for (let j = 1; j < arr.length; j++) {
-          // Check if any character is uppercase in any of the strings
-          if (arr[j][i] !== arr[j][i].toLowerCase()) {
-            isUpperCase = true;
-          }
-          // If any character differs from the first string
-          if (arr[j][i] !== resultChars[i]) {
-            isConsistent = false;
-            break;
-          }
-        }
+        if (resultChars[i].match(/[A-Za-z]/)) {
+            // Check if it's a letter
+            for (let j = 1; j < arr.length; j++) {
+                // Check if any character is uppercase in any of the strings
+                if (arr[j][i] !== arr[j][i].toLowerCase()) {
+                    isUpperCase = true;
+                }
+                // If any character differs from the first string
+                if (arr[j][i] !== resultChars[i]) {
+                    isConsistent = false;
+                    break;
+                }
+            }
 
-        // Replace with 'X' or 'x' based on case
-        if (!isConsistent) {
-          resultChars[i] = isUpperCase ? "X" : "x";
+            // Replace with 'X' or 'x' based on case
+            if (!isConsistent) {
+                resultChars[i] = isUpperCase ? "X" : "x";
+            }
         }
-      }
-      // Non-letter characters are kept as is.
+        // Non-letter characters are kept as is.
     }
 
     return resultChars.join("");
-  };
+};
 
 export const computeTypeString = (voteData: Vote) => {
     // Implement your computation logic here
@@ -58,7 +58,7 @@ export const computeTypeString = (voteData: Vote) => {
     const sensoryModality = getSensoryModality(voteData);
     const deModality = getDeModality(voteData);
     if (type === "Impossible type") {
-      return type;
+        return type;
     }
     return `${sensoryModality}${deModality} ${type}`;
 };
@@ -105,29 +105,29 @@ export function possibleTypes(voteData: Vote) {
     }
     if (voteData.consumeOrBlast == "Consume") {
         filteredTypes = filteredTypes.filter((item) => {
-            const indexOfC = item.indexOf("C");
-            const indexOfB = item.indexOf("B");
+            const indexOfC = item.slice(-7).indexOf("C");
+            const indexOfB = item.slice(-7).indexOf("B");
             return indexOfC < indexOfB;
         });
     }
     if (voteData.consumeOrBlast == "Blast") {
         filteredTypes = filteredTypes.filter((item) => {
-            const indexOfC = item.indexOf("C");
-            const indexOfB = item.indexOf("B");
+            const indexOfC = item.slice(-7).indexOf("C");
+            const indexOfB = item.slice(-7).indexOf("B");
             return indexOfC > indexOfB;
         });
     }
     if (voteData.sleepOrPlay == "Sleep") {
         filteredTypes = filteredTypes.filter((item) => {
-            const indexOfS = item.indexOf("S");
-            const indexOfP = item.indexOf("P");
+            const indexOfS = item.slice(-7).indexOf("S");
+            const indexOfP = item.slice(-7).indexOf("P");
             return indexOfS < indexOfP;
         });
     }
     if (voteData.sleepOrPlay == "Play") {
         filteredTypes = filteredTypes.filter((item) => {
-            const indexOfS = item.indexOf("S");
-            const indexOfP = item.indexOf("P");
+            const indexOfS = item.slice(-7).indexOf("S");
+            const indexOfP = item.slice(-7).indexOf("P");
             return indexOfS > indexOfP;
         });
     }
