@@ -24,5 +24,5 @@ export interface Typee {
 
 export interface TypeeCreator {
     id: string;
-    name: string;
+    username: string;
 }

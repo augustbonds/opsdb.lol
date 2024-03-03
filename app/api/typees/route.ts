@@ -1,6 +1,5 @@
 import { getSession } from '@auth0/nextjs-auth0';
 import prisma from '../db';
-import { Typee } from '@prisma/client';
 
 // Define a type for the request body
 interface AddTypeeRequestBody {
@@ -83,7 +82,7 @@ export const GET = async function handle(req: Request) {
       name: typee.name,
       createdBy: {
         id: typee.createdBy.id,
-        name: typee.createdBy.name
+        username: typee.createdBy.username
       }
     }))
 

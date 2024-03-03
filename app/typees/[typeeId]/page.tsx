@@ -29,7 +29,7 @@ export default function TypeePage({ params }: { params: { typeeId: string } }) {
   return (
     <div className="">
       <h1>{typee.name}</h1>
-      {/* <p>Created by: {typee?.createdBy.name}</p> */}
+      <p>Created by: {typee?.createdBy.username}</p>
       <VoteBars votes={votes} />
       <Link href={`/typees/${typeeId}/vote`}>
         <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
@@ -157,7 +157,7 @@ const VoteList: React.FC<VoteListProps> = ({ votes }) => {
       <h1>What other people think</h1>
       <ul>
         {votes.map((vote) => (
-          <li key={vote.id}>{computeTypeString(vote)}</li>
+          <li key={vote.id}>{computeTypeString(vote)} voted by: {vote.author.username}</li>
         ))}
       </ul>
     </div>
