@@ -18,11 +18,11 @@ const Header = () => {
             Profile
           </Link>
         </nav>
-        <a href="/api/auth/login">
+        <Link href="/api/auth/login">
           <button className="inline-flex items-center bg-gray-500 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
             Login
           </button>
-        </a>
+        </Link>
       </div>
     </header>
   );

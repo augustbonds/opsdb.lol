@@ -7,24 +7,6 @@ import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 const VotePage = ({ params }: { params: { typeeId: string } }) => {
-  const { user, error, isLoading } = useUser();
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!user) {
-    return (
-      <div>
-        <p>You need to be logged in to vote</p>
-        <Link href="/api/auth/login">
-          <button className="inline-flex items-center text-white bg-gray-500 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
-            Login
-          </button>
-        </Link>
-      </div>
-    );
-  }
-
   const typeeId = params.typeeId;
   const [vote, setVoteData] = useState<Vote>({
     observerOrDecider: "",
@@ -44,7 +26,6 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
   const [typeeName, setTypeeName] = useState("");
 
   const computeNewType = useCallback(computeTypeString, []);
-
   useEffect(() => {
     const newValue = computeNewType(vote);
     setComputedType(newValue);
@@ -57,6 +38,28 @@ const VotePage = ({ params }: { params: { typeeId: string } }) => {
         setTypeeName(data.name);
       });
   }, [typeeId]);
+  
+  const { user, error, isLoading } = useUser();
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!user) {
+    return (
+      <div>
+        <p>You need to be logged in to vote</p>
+        <Link href="/api/auth/login">
+          <button className="inline-flex items-center text-white bg-gray-500 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
+            Login
+          </button>
+        </Link>
+      </div>
+    );
+  }
+
+
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
